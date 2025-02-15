@@ -6,12 +6,17 @@ import (
 	"github.com/caarlos0/env/v11"
 )
 
-type Env string
+type Env string // Env is a custom type representing the environment
 
 const (
-	Env_Test Env = "test"
-	Env_DEV  Env = "dev"
+	Env_Test Env = "test" // for the test environment
+	Env_DEV  Env = "dev"  // for the development environment.
 )
+
+// The Config struct holds all the configuration settings for the application.
+// Each field in the struct corresponds to an environment variable, specified using the env tag.
+// Example: ApiServerPort string env:"APISERVER_PORT" means the ApiServerPort field will be populated
+// from the APISERVER_PORT environment variable
 
 type Config struct {
 	ApiServerPort string `env:"APISERVER_PORT"`
@@ -25,6 +30,8 @@ type Config struct {
 	Env           Env    `env:"ENV" envDefault:"dev"`
 	ProjectRoot   string `env:"PROJECT_ROOT"`
 }
+
+// This method generates a PostgreSQL database connection URL based on the configuration.
 
 func (c *Config) DbUrl() string {
 	port := c.DbPort
@@ -40,6 +47,8 @@ func (c *Config) DbUrl() string {
 	)
 }
 
+// This function creates and returns a Config object
+// It uses the env.ParseAs function to automatically read environment variables and populate the Config struct.
 func NewConfig() (*Config, error) {
 	cfg, err := env.ParseAs[Config]() //generic function to populate config fields with the env variables
 	if err != nil {
