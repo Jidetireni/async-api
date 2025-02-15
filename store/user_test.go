@@ -15,6 +15,8 @@ func TestUserStore(t *testing.T) {
 	testenv := fixtures.NewTestEnv(t)
 	cleanUp := testenv.SetUpDb(t)
 
+	// The anonymous function (func() { ... }) is used to wrap the call to cleanUp(t)
+	// because t.Cleanup expects a function with no arguments and no return values
 	t.Cleanup(func() {
 		cleanUp(t)
 	})
