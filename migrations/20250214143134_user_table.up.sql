@@ -19,7 +19,7 @@ CREATE TABLE report_jobs (
     output_file_path VARCHAR,
     download_url VARCHAR,
     download_url_expires_at TIMESTAMPTZ,
-    error_message VARCHAR,  -- <-- Added missing comma here
+    error_message VARCHAR,
     created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     started_at TIMESTAMP,
     failed_at TIMESTAMPTZ,
